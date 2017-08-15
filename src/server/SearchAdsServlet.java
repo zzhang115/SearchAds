@@ -1,4 +1,4 @@
-package servlets;
+package server;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
