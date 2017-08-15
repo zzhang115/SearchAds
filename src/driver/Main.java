@@ -28,28 +28,30 @@ public class Main {
         String memcachedServer = args[2];
         int memcachedPortal = Integer.parseInt(args[3]);
 
-        AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath, memcachedServer, memcachedPortal, MYSQL_HOST_PORT, MYSQL_DB, MYSQL_USER, MYSQL_PASS);
-        if(adsEngine.init())
-        {
-            System.out.println("Ready to take quey");
-            try{
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                String query;
-                while((query=br.readLine())!=null){
-                    //System.out.println(query);
-                    List<Ad> adsCandidates = adsEngine.selectAds(query);
-                    for(Ad ad : adsCandidates)
-                    {
-                        System.out.println("final selected ad id = " + ad.adId);
-                        System.out.println("final selected ad rank score = " + ad.rankScore);
-                    }
-                }
-
-            }catch(IOException io){
-                io.printStackTrace();
-            }
-        } else {
-            System.err.println("Ads Engine initilize failed!");
-        }
+        AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath, memcachedServer,
+                memcachedPortal, MYSQL_HOST_PORT, MYSQL_DB, MYSQL_USER, MYSQL_PASS);
+        adsEngine.initEngine();
+//        if(adsEngine.init())
+//        {
+//            System.out.println("Ready to take quey");
+//            try{
+//                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//                String query;
+//                while((query=br.readLine())!=null){
+//                    System.out.println(query);
+//                    List<Ad> adsCandidates = adsEngine.selectAds(query);
+//                    for(Ad ad : adsCandidates)
+//                    {
+//                        System.out.println("final selected ad id = " + ad.adId);
+//                        System.out.println("final selected ad rank score = " + ad.rankScore);
+//                    }
+//                }
+//
+//            }catch(IOException io){
+//                io.printStackTrace();
+//            }
+//        } else {
+//            System.err.println("Ads Engine initilize failed!");
+//        }
     }
 }
