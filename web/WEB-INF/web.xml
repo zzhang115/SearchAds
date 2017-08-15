@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>SearchAdsServlet</servlet-name>
-        <servlet-class>ads.SearchAdsServlet</servlet-class>
+        <servlet-class>servlets.SearchAdsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchAdsServlet</servlet-name>
