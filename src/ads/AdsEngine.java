@@ -15,32 +15,32 @@ import java.util.List;
  */
 
 public class AdsEngine {
-    private String mAdsDataFilePath;
-    private String mBudgetFilePath;
+    private String adsDataFilePath;
+    private String budgetFilePath;
     private IndexBuilder indexBuilder;
-    private String mMemcachedServer;
-    private int mMemcachedPortal;
-    private String mysql_host;
-    private String mysql_db;
-    private String mysql_user;
-    private String mysql_pass;
+    private String memcachedServer;
+    private int memcachedPort;
+    private String mysqlHost;
+    private String mysqlDB;
+    private String mysqlUser;
+    private String mysqlPass;
 
-    public AdsEngine(String mAdsDataFilePath, String mBudgetFilePath, String mMemcachedServer,
-                     int mMemcachedPortal, String mysql_host, String mysql_db, String mysql_user, String mysql_pass) {
-        this.mAdsDataFilePath = mAdsDataFilePath;
-        this.mBudgetFilePath = mBudgetFilePath;
-        this.mMemcachedServer = mMemcachedServer;
-        this.mMemcachedPortal = mMemcachedPortal;
-        this.mysql_host = mysql_host;
-        this.mysql_db = mysql_db;
-        this.mysql_user = mysql_user;
-        this.mysql_pass = mysql_pass;
-        indexBuilder = new IndexBuilder();
+    public AdsEngine(String mAdsDataFilePath, String mBudgetFilePath, String memcachedServer,
+                     int memcachedPort, String mysqlHost, String mysqlDB, String mysqlUser, String mysqlPass) {
+        this.adsDataFilePath = mAdsDataFilePath;
+        this.budgetFilePath = mBudgetFilePath;
+        this.memcachedServer = memcachedServer;
+        this.memcachedPort = memcachedPort;
+        this.mysqlHost = mysqlHost;
+        this.mysqlDB = mysqlDB;
+        this.mysqlUser = mysqlUser;
+        this.mysqlPass = mysqlPass;
+        indexBuilder = new IndexBuilder(memcachedServer, memcachedPort, mysqlHost, mysqlDB, mysqlUser, mysqlPass);
     }
 
     public void initEngine() {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(mAdsDataFilePath));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(adsDataFilePath));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 JSONObject jsonObject = new JSONObject(line);
@@ -65,7 +65,10 @@ public class AdsEngine {
                 for (Object keyWord : keyWords) {
                     keyWordsList.add(String.valueOf(keyWord));
                 }
-//                Ad ad = new Ad()
+//                System.out.println("adId "+adId+" campaignId " +campaignId+" brand"+ brand+" price"+ price+" thumbnail"+ thumbnail+" title"+ title+" detailUrl"+ detailUrl+" bidPrice"+ bidPrice+" pClick"+ pClick+" category"+ category+" description"+ description+" keyWordsList"+ keyWordsList);
+                Ad ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detailUrl, bidPrice, pClick, category, description, keyWordsList);
+
+                indexBuilder.buildIndex(ad);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -8,8 +8,8 @@ public class Ad implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public Long adId;
-	public Long campaignId;
+	public long adId;
+	public long campaignId;
 	public List<String> keyWords;
 	public double relevanceScore;
 	public double pClick;	
@@ -27,27 +27,21 @@ public class Ad implements Serializable{
     public String query; //required
     public String category;
 
-	public Ad(Long adId, Long campaignId, List<String> keyWords, double relevanceScore,
-			  double pClick, double bidPrice, double rankScore, double qualityScore,
-			  double costPerClick, int position, String title, double price, String thumbnail,
-			  String description, String brand, String detail_url, String query, String category) {
+	public Ad(long adId, long campaignId, String brand, double price,
+			  String thumbnail, String title, String detail_url,
+			  double bidPrice, double pClick, String category,
+			  String description, List<String> keyWords) {
 		this.adId = adId;
 		this.campaignId = campaignId;
 		this.keyWords = keyWords;
-		this.relevanceScore = relevanceScore;
 		this.pClick = pClick;
 		this.bidPrice = bidPrice;
-		this.rankScore = rankScore;
-		this.qualityScore = qualityScore;
-		this.costPerClick = costPerClick;
-		this.position = position;
 		this.title = title;
 		this.price = price;
 		this.thumbnail = thumbnail;
 		this.description = description;
 		this.brand = brand;
 		this.detail_url = detail_url;
-		this.query = query;
 		this.category = category;
 	}
 }
