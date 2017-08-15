@@ -27,7 +27,10 @@ public class Ad implements Serializable{
     public String query; //required
     public String category;
 
-	public Ad(Long adId, Long campaignId, List<String> keyWords, double relevanceScore, double pClick, double bidPrice, double rankScore, double qualityScore, double costPerClick, int position, String title, double price, String thumbnail, String description, String brand, String detail_url, String query, String category) {
+	public Ad(Long adId, Long campaignId, List<String> keyWords, double relevanceScore,
+			  double pClick, double bidPrice, double rankScore, double qualityScore,
+			  double costPerClick, int position, String title, double price, String thumbnail,
+			  String description, String brand, String detail_url, String query, String category) {
 		this.adId = adId;
 		this.campaignId = campaignId;
 		this.keyWords = keyWords;

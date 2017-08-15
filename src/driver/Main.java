@@ -1,6 +1,12 @@
 package driver;
 
+import ads.Ad;
 import ads.AdsEngine;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Created by zzc on 8/14/17.
@@ -23,25 +29,27 @@ public class Main {
         int memcachedPortal = Integer.parseInt(args[3]);
 
         AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath, memcachedServer, memcachedPortal, MYSQL_HOST_PORT, MYSQL_DB, MYSQL_USER, MYSQL_PASS);
-//        if(adsEngine.init())
-//        {
-//            System.out.println("Ready to take quey");
-//            try{
-//                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//                String query;
-//                while((query=br.readLine())!=null){
-//                    //System.out.println(query);
-//                    List<Ad> adsCandidates = adsEngine.selectAds(query);
-//                    for(Ad ad : adsCandidates)
-//                    {
-//                        System.out.println("final selected ad id = " + ad.adId);
-//                        System.out.println("final selected ad rank score = " + ad.rankScore);
-//                    }
-//                }
-//
-//            }catch(IOException io){
-//                io.printStackTrace();
-//            }
-//        }
+        if(adsEngine.init())
+        {
+            System.out.println("Ready to take quey");
+            try{
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                String query;
+                while((query=br.readLine())!=null){
+                    //System.out.println(query);
+                    List<Ad> adsCandidates = adsEngine.selectAds(query);
+                    for(Ad ad : adsCandidates)
+                    {
+                        System.out.println("final selected ad id = " + ad.adId);
+                        System.out.println("final selected ad rank score = " + ad.rankScore);
+                    }
+                }
+
+            }catch(IOException io){
+                io.printStackTrace();
+            }
+        } else {
+            System.err.println("Ads Engine initilize failed!");
+        }
     }
 }
