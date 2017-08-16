@@ -51,4 +51,8 @@ public class IndexBuilder {
     public void addAdsToDataBase(Ad ad) {
 
     }
+
+    public void cleanup() {
+
+    }
 }

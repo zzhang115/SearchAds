@@ -1,5 +1,7 @@
 package SQLAccess;
 
+import ads.Ad;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,6 +33,13 @@ public class SQLAccess {
           } catch (SQLException e) {
               e.printStackTrace();
           }
+     }
+
+     public void addAdData(Ad ad) {
+         boolean
+         try {
+
+         }
      }
 
 }
