@@ -32,7 +32,7 @@ public class Utility {
     }
 
     // remove stop words, tokenize, stem in keywords
-    public static List<String> cleanedUselessTokens(String keyWords) {
+    public static List<String> cleanUselessTokens(String keyWords) {
         StringReader reader = new StringReader(keyWords.toLowerCase());
         Tokenizer tokenizer = new StandardTokenizer(LUCENE_VERSION, reader);
         TokenStream tokenStream = new StandardFilter(LUCENE_VERSION, tokenizer);

@@ -32,7 +32,7 @@ public class IndexBuilder {
             String keyWords = Utility.strJoin(ad.keyWords, ",");
             System.out.println(keyWords);
             MemcachedClient client = new MemcachedClient(new InetSocketAddress(memcachedServer, memcachedPort));
-            List<String> tokens = Utility.cleaned
+            List<String> tokens = Utility.cleanUselessTokens(keyWords);
         } catch (IOException e) {
             e.printStackTrace();
         }
