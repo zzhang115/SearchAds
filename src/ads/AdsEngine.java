@@ -68,7 +68,7 @@ public class AdsEngine {
 //                System.out.println("adId "+adId+" campaignId " +campaignId+" brand"+ brand+" price"+ price+" thumbnail"+ thumbnail+" title"+ title+" detailUrl"+ detailUrl+" bidPrice"+ bidPrice+" pClick"+ pClick+" category"+ category+" description"+ description+" keyWordsList"+ keyWordsList);
                 Ad ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detailUrl, bidPrice, pClick, category, description, keyWordsList);
 
-                indexBuilder.buildIndex(ad);
+                indexBuilder.buildInvertIndex(ad);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

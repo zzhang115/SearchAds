@@ -4,6 +4,7 @@ import net.spy.memcached.MemcachedClient;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.List;
 
 /**
  * Created by zzc on 8/14/17.
@@ -26,10 +27,12 @@ public class IndexBuilder {
         this.mysqlPassword = mysqlPassword;
     }
 
-    public void buildIndex(Ad ad) {
+    public void buildInvertIndex(Ad ad) {
         try {
             String keyWords = Utility.strJoin(ad.keyWords, ",");
+            System.out.println(keyWords);
             MemcachedClient client = new MemcachedClient(new InetSocketAddress(memcachedServer, memcachedPort));
+            List<String> tokens = Utility.cleaned
         } catch (IOException e) {
             e.printStackTrace();
         }
