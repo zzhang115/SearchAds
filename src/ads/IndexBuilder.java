@@ -4,7 +4,9 @@ import net.spy.memcached.MemcachedClient;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zzc on 8/14/17.
@@ -30,9 +32,22 @@ public class IndexBuilder {
     public void buildInvertIndex(Ad ad) {
         try {
             String keyWords = Utility.strJoin(ad.keyWords, ",");
-            System.out.println(keyWords);
             MemcachedClient client = new MemcachedClient(new InetSocketAddress(memcachedServer, memcachedPort));
             List<String> tokens = Utility.cleanUselessTokens(keyWords);
+
+            // use client to set key is item's token and its correspond adIdList, it seems like a map(token, adIdList)
+            for (String token : tokens) {
+                if (client.get(token) instanceof Set) {
+                    @SuppressWarnings("Unchecked")
+                    Set<Long> adIdList = (Set<Long>) client.get(token);
+                    adIdList.add(ad.adId);
+                    client.set(token, EXPIRE, adIdList);
+                } else {
+                    Set<Long> adIdList = new HashSet<Long>();
+                    adIdList.add(ad.adId);
+                    client.set(token, EXPIRE, adIdList);
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
