@@ -18,23 +18,11 @@ public class AdsEngine {
     private String adsDataFilePath;
     private String budgetFilePath;
     private IndexBuilder indexBuilder;
-    private String memcachedServer;
-    private int memcachedPort;
-    private String mysqlHost;
-    private String mysqlDB;
-    private String mysqlUser;
-    private String mysqlPass;
 
     public AdsEngine(String mAdsDataFilePath, String mBudgetFilePath, String memcachedServer,
                      int memcachedPort, String mysqlHost, String mysqlDB, String mysqlUser, String mysqlPass) {
         this.adsDataFilePath = mAdsDataFilePath;
         this.budgetFilePath = mBudgetFilePath;
-        this.memcachedServer = memcachedServer;
-        this.memcachedPort = memcachedPort;
-        this.mysqlHost = mysqlHost;
-        this.mysqlDB = mysqlDB;
-        this.mysqlUser = mysqlUser;
-        this.mysqlPass = mysqlPass;
         indexBuilder = new IndexBuilder(memcachedServer, memcachedPort, mysqlHost, mysqlDB, mysqlUser, mysqlPass);
     }
 
@@ -66,7 +54,7 @@ public class AdsEngine {
                     keyWordsList.add(String.valueOf(keyWord));
                 }
                 Ad ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detailUrl, bidPrice, pClick, category, description, keyWordsList);
-                indexBuilder.buildInvertIndex(ad);
+                indexBuilder.buildTokenToAdId(ad);
 //                indexBuilder.build
             }
         } catch (FileNotFoundException e) {
