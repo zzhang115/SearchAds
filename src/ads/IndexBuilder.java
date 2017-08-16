@@ -14,13 +14,16 @@ import java.util.Set;
  */
 public class IndexBuilder {
     private static final int EXPIRE = 72000;
+    private static final String MEMCACHEDSERVER = "127.0.0.1";
+    private static final int MEMCACHEDPORT = 11211;
     private MemcachedClient client;
     private SQLAccess sqlAccess;
 
-    public IndexBuilder(String memcachedServer, int memcachedPort, String mysqlHost, String mysqlDB, String mysqlUser, String mysqlPassword) {
+
+    public IndexBuilder() {
         try {
-            this.client = new MemcachedClient(new InetSocketAddress(memcachedServer, memcachedPort));
-            this.sqlAccess = new SQLAccess(mysqlUser, mysqlPassword, mysqlHost, mysqlDB);
+            this.client = new MemcachedClient(new InetSocketAddress(MEMCACHEDSERVER, MEMCACHEDPORT));
+            this.sqlAccess = new SQLAccess();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -19,11 +19,10 @@ public class AdsEngine {
     private String budgetFilePath;
     private IndexBuilder indexBuilder;
 
-    public AdsEngine(String mAdsDataFilePath, String mBudgetFilePath, String memcachedServer,
-                     int memcachedPort, String mysqlHost, String mysqlDB, String mysqlUser, String mysqlPass) {
+    public AdsEngine(String mAdsDataFilePath, String mBudgetFilePath) {
         this.adsDataFilePath = mAdsDataFilePath;
         this.budgetFilePath = mBudgetFilePath;
-        indexBuilder = new IndexBuilder(memcachedServer, memcachedPort, mysqlHost, mysqlDB, mysqlUser, mysqlPass);
+        indexBuilder = new IndexBuilder();
     }
 
     public void initEngine() {

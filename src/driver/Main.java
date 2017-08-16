@@ -12,24 +12,17 @@ import java.util.List;
  * Created by zzc on 8/14/17.
  */
 public class Main {
-    private static final String MYSQL_HOST_PORT = "127.0.0.1:3306";
-    private static final String MYSQL_DB = "searchads";
-    private static final String MYSQL_USER = "root";
-    private static final String MYSQL_PASS = "238604";
 
     public static void main(String[] args) {
-        if(args.length < 4)
+        if(args.length < 2)
         {
-            System.out.println("Usage: AdsServer <adsDataFilePath> <budgetDataFilePath> <memcachedServer> <memcachedPortal>");
+            System.out.println("Usage: AdsServer <adsDataFilePath> <budgetDataFilePath>");
             System.exit(0);
         }
         String adsDataFilePath = args[0];
         String budgetDataFilePath = args[1];
-        String memcachedServer = args[2];
-        int memcachedPortal = Integer.parseInt(args[3]);
 
-        AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath, memcachedServer,
-                memcachedPortal, MYSQL_HOST_PORT, MYSQL_DB, MYSQL_USER, MYSQL_PASS);
+        AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath);
         adsEngine.initEngine();
 //        if(adsEngine.init())
 //        {
