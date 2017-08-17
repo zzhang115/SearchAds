@@ -1,6 +1,8 @@
 package SQLAccess;
 
 import ads.Ad;
+import ads.Campaign;
+import ads.Utility;
 
 import java.sql.*;
 
@@ -34,7 +36,7 @@ public class SQLAccess {
           }
      }
 
-     private boolean RecordExists(Connection conn, String sqlString) {
+     private boolean isRecordExists(Connection conn, String sqlString) {
          boolean isExists = false;
          PreparedStatement existStatement = null;
          try {
@@ -47,13 +49,46 @@ public class SQLAccess {
          }
          return isExists;
      }
-     public void addAdData(Ad ad) {
-         String recordCheck = "select adId from " + MYSQL_DB + "." + MYSQL_TABLE + " where " +
-                 "adId=" + ad.adId;
 
-//         try {
-//
-//         }
+     public void addAdData(Ad ad) {
+         String recordCheckSQL = "select adId from " + MYSQL_DB + "." + MYSQL_TABLE + " where " +
+                 "adId=" + ad.adId + ";";
+         String insertDataSQL = "insert into " + MYSQL_DB + "." + MYSQL_TABLE + " values(" +
+                 "?,?,?,?,?,?,?,?,?,?,?);";
+         if (!isRecordExists(connection, recordCheckSQL)) {
+             try {
+                 PreparedStatement insertStatement = connection.prepareStatement(insertDataSQL);
+                 insertStatement.setLong(1, ad.adId);
+                 insertStatement.setLong(2, ad.campaignId);
+                 insertStatement.setString(3, Utility.strJoin(ad.keyWords, ","));
+                 insertStatement.setDouble(4, ad.bidPrice);
+                 insertStatement.setDouble(5, ad.price);
+                 insertStatement.setString(6, ad.thumbnail);
+                 insertStatement.setString(7, ad.description);
+                 insertStatement.setString(8, ad.brand);
+                 insertStatement.setString(9, ad.detailUrl);
+                 insertStatement.setString(10, ad.category);
+                 insertStatement.setString(11, ad.title);
+                 insertStatement.executeUpdate();
+                 insertStatement.close();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }
+         }
+     }
+
+     public void addCampaignData(Campaign campaign) {
+
+     }
+
+     public void connectionClose() {
+         try {
+             if (connection != null) {
+                 connection.close();
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
      }
 
 }

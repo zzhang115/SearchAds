@@ -19,19 +19,19 @@ public class IndexBuilder {
     private MemcachedClient client;
     private SQLAccess sqlAccess;
 
-
-    public IndexBuilder() {
-        try {
-            this.client = new MemcachedClient(new InetSocketAddress(MEMCACHEDSERVER, MEMCACHEDPORT));
-            this.sqlAccess = new SQLAccess();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void indexBuilderSQLInit() {
+        sqlAccess = new SQLAccess();
     }
 
     public void buildTokenToAdId(Ad ad) {
         String keyWords = Utility.strJoin(ad.keyWords, ",");
         List<String> tokens = Utility.cleanUselessTokens(keyWords);
+
+        try {
+            client = new MemcachedClient(new InetSocketAddress(MEMCACHEDSERVER, MEMCACHEDPORT));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // use client to set key is item's token and its correspond adIdList, it seems like a map(token, adIdList)
         for (String token : tokens) {
@@ -48,11 +48,11 @@ public class IndexBuilder {
         }
     }
 
-    public void addAdsToDataBase(Ad ad) {
-
+    public void addAdsToDatabase(Ad ad) {
+        sqlAccess.addAdData(ad);
     }
 
-    public void cleanup() {
-
+    public void sqlAccessClose() {
+        sqlAccess.connectionClose();
     }
 }

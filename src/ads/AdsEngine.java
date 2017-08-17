@@ -26,7 +26,12 @@ public class AdsEngine {
     }
 
     public void initEngine() {
+       buildAdsData();
+    }
+
+    public void buildAdsData() {
         try {
+            indexBuilder.indexBuilderSQLInit();
             BufferedReader bufferedReader = new BufferedReader(new FileReader(adsDataFilePath));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -41,7 +46,7 @@ public class AdsEngine {
                 double price = jsonObject.isNull("price") ? 100.0 : jsonObject.getDouble("price");
                 String thumbnail= jsonObject.isNull("thumbnail") ? "" : jsonObject.getString("thumbnail");
                 String title = jsonObject.isNull("title") ? "" : jsonObject.getString("title");
-                String detailUrl= jsonObject.isNull("detail_url") ? "" : jsonObject.getString("detail_url");
+                String detailUrl= jsonObject.isNull("detailUrl") ? "" : jsonObject.getString("detailUrl");
                 double bidPrice = jsonObject.isNull("bidPrice") ? 1.0 : jsonObject.getDouble("bidPrice");
                 double pClick = jsonObject.isNull("pClick") ? 0.0 : jsonObject.getDouble("pClick");
                 String category = jsonObject.isNull("category") ? "" : jsonObject.getString("category");
@@ -54,12 +59,16 @@ public class AdsEngine {
                 }
                 Ad ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detailUrl, bidPrice, pClick, category, description, keyWordsList);
                 indexBuilder.buildTokenToAdId(ad);
-//                indexBuilder.build
+                indexBuilder.addAdsToDatabase(ad);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            indexBuilder.sqlAccessClose();
         }
     }
+
+
 }
