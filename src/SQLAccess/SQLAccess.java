@@ -12,7 +12,8 @@ import java.sql.*;
 public class SQLAccess {
      private static final String MYSQL_HOST_PORT = "127.0.0.1:3306";
      private static final String MYSQL_DB = "searchads";
-     private static final String MYSQL_TABLE = "ad";
+     private static final String MYSQL_ADTABLE = "ad";
+     private static final String MYSQL_CAMPAIGNTABLE = "campaign";
      private static final String MYSQL_USER = "root";
      private static final String MYSQL_PASS = "238604";
      private Connection connection = null;
@@ -51,9 +52,9 @@ public class SQLAccess {
      }
 
      public void addAdData(Ad ad) {
-         String recordCheckSQL = "select adId from " + MYSQL_DB + "." + MYSQL_TABLE + " where " +
+         String recordCheckSQL = "select adId from " + MYSQL_DB + "." + MYSQL_ADTABLE + " where " +
                  "adId=" + ad.adId + ";";
-         String insertDataSQL = "insert into " + MYSQL_DB + "." + MYSQL_TABLE + " values(" +
+         String insertDataSQL = "insert into " + MYSQL_DB + "." + MYSQL_ADTABLE + " values(" +
                  "?,?,?,?,?,?,?,?,?,?,?);";
          if (!isRecordExists(connection, recordCheckSQL)) {
              try {
@@ -78,7 +79,21 @@ public class SQLAccess {
      }
 
      public void addCampaignData(Campaign campaign) {
-
+         String recordCheckSQL = "select campaignId from " + MYSQL_DB + "." + MYSQL_CAMPAIGNTABLE+ " where " +
+                 "campaignId=" + campaign.campaignId + ";";
+         String insertDataSQL = "insert into " + MYSQL_DB + "." + MYSQL_CAMPAIGNTABLE+ " values(" +
+                 "?,?);";
+         if (!isRecordExists(connection, recordCheckSQL)) {
+             try {
+                 PreparedStatement insertStatement = connection.prepareStatement(insertDataSQL);
+                 insertStatement.setLong(1, campaign.campaignId);
+                 insertStatement.setDouble(2, campaign.budget);
+                 insertStatement.executeUpdate();
+                 insertStatement.close();
+             } catch (SQLException e) {
+                 e.printStackTrace();
+             }
+         }
      }
 
      public void connectionClose() {

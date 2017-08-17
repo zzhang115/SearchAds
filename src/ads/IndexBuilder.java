@@ -32,7 +32,6 @@ public class IndexBuilder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         // use client to set key is item's token and its correspond adIdList, it seems like a map(token, adIdList)
         for (String token : tokens) {
             if (client.get(token) instanceof Set) {
@@ -50,6 +49,10 @@ public class IndexBuilder {
 
     public void addAdsToDatabase(Ad ad) {
         sqlAccess.addAdData(ad);
+    }
+
+    public void addBudgetsToDatabase(Campaign campaign) {
+        sqlAccess.addCampaignData(campaign);
     }
 
     public void sqlAccessClose() {

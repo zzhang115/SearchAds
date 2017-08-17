@@ -26,12 +26,13 @@ public class AdsEngine {
     }
 
     public void initEngine() {
-       buildAdsData();
+//       buildAdsData();
+        buildBudgetData();
     }
 
     public void buildAdsData() {
+        indexBuilder.indexBuilderSQLInit();
         try {
-            indexBuilder.indexBuilderSQLInit();
             BufferedReader bufferedReader = new BufferedReader(new FileReader(adsDataFilePath));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -70,5 +71,25 @@ public class AdsEngine {
         }
     }
 
+    public void buildBudgetData() {
+        indexBuilder.indexBuilderSQLInit();
+        try {
+            BufferedReader budgetReader = new BufferedReader(new FileReader(budgetFilePath));
+            String line;
+            while ((line = budgetReader.readLine()) != null) {
+                JSONObject campaignJson = new JSONObject(line);
+                Long campaignId = campaignJson.getLong("campaignId");
+                double budget = campaignJson.getDouble("budget");
+                Campaign campaign = new Campaign(campaignId, budget);
+                indexBuilder.addBudgetsToDatabase(campaign);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            indexBuilder.sqlAccessClose();
+        }
+    }
 
 }
