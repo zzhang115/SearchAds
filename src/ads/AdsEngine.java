@@ -1,7 +1,9 @@
 package ads;
 
+import org.apache.lucene.queryparser.surround.parser.QueryParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import query.QueryHandling;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -27,7 +29,7 @@ public class AdsEngine {
 
     public void initEngine() {
 //       buildAdsData();
-        buildBudgetData();
+//        buildBudgetData();
     }
 
     public void buildAdsData() {
@@ -92,4 +94,10 @@ public class AdsEngine {
         }
     }
 
+    public List<Ad> selectAds(String query) {
+        //get query string keyword
+        List<String> queryTerms = QueryHandling.getInstance().QueryStringHandling(query);
+
+
+    }
 }
