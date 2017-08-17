@@ -2,9 +2,7 @@ package SQLAccess;
 
 import ads.Ad;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by zzc on 8/15/17.
@@ -12,6 +10,7 @@ import java.sql.SQLException;
 public class SQLAccess {
      private static final String MYSQL_HOST_PORT = "127.0.0.1:3306";
      private static final String MYSQL_DB = "searchads";
+     private static final String MYSQL_TABLE = "ad";
      private static final String MYSQL_USER = "root";
      private static final String MYSQL_PASS = "238604";
      private Connection connection = null;
@@ -35,11 +34,26 @@ public class SQLAccess {
           }
      }
 
-     public void addAdData(Ad ad) {
-         boolean
+     private boolean RecordExists(Connection conn, String sqlString) {
+         boolean isExists = false;
+         PreparedStatement existStatement = null;
          try {
-
+             existStatement = conn.prepareStatement(sqlString);
+             ResultSet resultSet = existStatement.executeQuery();
+             isExists = resultSet.next();
+             existStatement.close();
+         } catch (SQLException e) {
+             e.printStackTrace();
          }
+         return isExists;
+     }
+     public void addAdData(Ad ad) {
+         String recordCheck = "select adId from " + MYSQL_DB + "." + MYSQL_TABLE + " where " +
+                 "adId=" + ad.adId;
+
+//         try {
+//
+//         }
      }
 
 }
