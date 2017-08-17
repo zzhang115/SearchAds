@@ -5,6 +5,8 @@ import ads.Campaign;
 import ads.Utility;
 
 import java.sql.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by zzc on 8/15/17.
@@ -76,6 +78,37 @@ public class SQLAccess {
                  e.printStackTrace();
              }
          }
+     }
+     public Ad getAdData(Long adId) {
+         PreparedStatement queryStatement = null;
+         ResultSet resultSet = null;
+         Ad ad = null;
+         String sql_string = "select * from " + MYSQL_DB+ "." + MYSQL_ADTABLE + " where adId=" + adId;
+         try {
+             queryStatement = connection.prepareStatement(sql_string);
+             resultSet = queryStatement.executeQuery();
+             if (resultSet.next()) {
+                 long campaignId = resultSet.getLong("campaignId");
+                 String keyWords = resultSet.getString("keyWords");
+                 List<String> keyWordsList = Arrays.asList(keyWords.split(","));
+                 double bidPrice = resultSet.getDouble("bidPrice");
+                 double price = resultSet.getDouble("price");
+                 String thumbnail = resultSet.getString("thumbnail");
+                 String description = resultSet.getString("description");
+                 String brand = resultSet.getString("brand");
+                 String detail_url = resultSet.getString("detail_url");
+                 String category = resultSet.getString("category");
+                 String title = resultSet.getString("title");
+                 double pClick = 0.0;
+                 ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detail_url, bidPrice, pClick, category, description, keyWordsList);
+             }
+             queryStatement.close();
+             resultSet.close();
+         }
+         catch(SQLException e ) {
+             e.printStackTrace();
+         }
+         return ad;
      }
 
      public void addCampaignData(Campaign campaign) {
