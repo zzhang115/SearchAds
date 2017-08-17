@@ -96,7 +96,7 @@ public class AdsEngine {
 
     public List<Ad> selectAds(String query) {
         //get query string keyword
-        List<String> queryTerms = QueryHandling.getInstance().QueryStringHandling(query);
+        List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
 
 
     }
