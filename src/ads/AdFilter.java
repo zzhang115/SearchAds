@@ -1,7 +1,6 @@
 package ads;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by zzc on 8/17/17.
@@ -20,7 +19,7 @@ public class AdFilter {
         return instance;
     }
 
-    public List<Ad> filterAdsLevelOne(List<Ad> candidateAds) {
+    public List<Ad> filterLevelOne(List<Ad> candidateAds) {
         if (candidateAds.size() < minNumOfAds) {
             return candidateAds;
         }
@@ -31,5 +30,21 @@ public class AdFilter {
             }
         }
         return firstFilterRestAds;
+    }
+
+    public List<Ad> filterLevelTwo(List<Ad> candidateAds) {
+        if (candidateAds.size() < minNumOfAds) {
+            return candidateAds;
+        }
+        List<Ad> secondFilterRestAds = new ArrayList<Ad>();
+        Collections.sort(candidateAds, new Comparator<Ad>() {
+            public int compare(Ad a, Ad b) {
+                return (int) ((b.relevanceScore - a.relevanceScore) * 100);
+            }
+        });
+        for (Ad ad : candidateAds) {
+            System.out.println("AdId:"+ad.adId+" sorted AdScore:"+ad.relevanceScore);
+        }
+        return secondFilterRestAds;
     }
 }

@@ -103,11 +103,13 @@ public class AdsEngine {
         List<Ad> adList = adsSelector.selectAds(queryTokens);
         adsSelector.adsSelectorSQLClose();
 
-        List<Ad> firstFilterRestedAds = AdFilter.getInstance().filterAdsLevelOne(adList);
+        List<Ad> firstFilterRestedAds = AdFilter.getInstance().filterLevelOne(adList);
 
         for (Ad ad : firstFilterRestedAds) {
             System.out.println("adId:"+ad.adId+" relevance:"+ad.relevanceScore);
         }
+        List<Ad> secondFilterRestedAds = AdFilter.getInstance().filterLevelTwo(firstFilterRestedAds);
+
         return adList;
 
     }

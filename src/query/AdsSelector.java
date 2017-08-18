@@ -44,7 +44,7 @@ public class AdsSelector {
                 }
             }
             for (Long adId : matchedAdsMap.keySet()) {
-                System.out.print("Selected AdID: " + adId + "token selected: "+ matchedAdsMap.get(adId) + " times");
+                System.out.println("Selected AdID: " + adId + "token selected: "+ matchedAdsMap.get(adId) + " times");
                 Ad ad = sqlAccess.getAdData(adId);
                 double relevanveScore = (double) (matchedAdsMap.get(adId) * 1.0 / ad.keyWords.size());
                 ad.relevanceScore = relevanveScore;
