@@ -1,4 +1,4 @@
-package Campaign;
+package campaign;
 
 public class Campaign {
 	public Long campaignId;

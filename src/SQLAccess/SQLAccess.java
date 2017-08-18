@@ -1,7 +1,7 @@
 package SQLAccess;
 
 import ads.Ad;
-import Campaign.Campaign;
+import campaign.Campaign;
 import ads.Utility;
 
 import java.sql.*;

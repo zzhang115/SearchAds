@@ -1,10 +1,9 @@
 package ads;
 
-import Campaign.Campaign;
-import Campaign.CampaignManager;
+import campaign.Campaign;
+import campaign.CampaignManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import query.AdsSelector;
 import query.QueryHandling;
 
 import java.io.BufferedReader;
@@ -97,7 +96,6 @@ public class AdsEngine {
     }
 
     public List<Ad> selectAds(String query) {
-        //get query string keyword
         List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
 
         AdsSelector adsSelector = new AdsSelector();
@@ -115,6 +113,8 @@ public class AdsEngine {
         List<Ad> finalAds = campaignManager.UpdateBudgetInfo(noDuplicateCampaignAdList);
         System.out.println("Final Ad size is: " + finalAds.size());
 
+        AdsAllocation adsAllocation = new AdsAllocation();
+        adsAllocation.allocateAds(finalAds);
         return adList;
 
     }
