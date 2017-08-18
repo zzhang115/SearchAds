@@ -1,7 +1,7 @@
 package SQLAccess;
 
 import ads.Ad;
-import ads.Campaign;
+import Campaign.Campaign;
 import ads.Utility;
 
 import java.sql.*;
@@ -127,6 +127,40 @@ public class SQLAccess {
              } catch (SQLException e) {
                  e.printStackTrace();
              }
+         }
+     }
+
+     public double getBudgetData(Long campaignId) {
+         PreparedStatement queryBudgetStatement = null;
+         ResultSet resultSet = null;
+         Double budget = 0.0;
+         String sqlString= "select budget from " + MYSQL_DB + ".campaign where campaignId=" + campaignId;
+         System.out.println("sql: " + sqlString);
+         try {
+             queryBudgetStatement = connection.prepareStatement(sqlString);
+             resultSet = queryBudgetStatement.executeQuery();
+             while (resultSet.next()) {
+                 budget = resultSet.getDouble("budget");
+             }
+             queryBudgetStatement.close();
+             resultSet.close();
+         }
+         catch(SQLException e ) {
+             e.printStackTrace();
+         }
+         return budget;
+     }
+
+     public void updateBudgetData(Long campaignId, double budget) {
+         PreparedStatement updateStatement = null;
+         String sqlString= "update " + MYSQL_DB + ".campaign set budget=" + budget +" where campaignId=" + campaignId;
+         System.out.println("sql: " + sqlString);
+         try {
+             updateStatement = connection.prepareStatement(sqlString);
+             updateStatement.executeUpdate();
+             updateStatement.close();
+         } catch(SQLException e ) {
+             e.printStackTrace();
          }
      }
 

@@ -1,5 +1,6 @@
 package ads;
 
+import Campaign.Campaign;
 import SQLAccess.SQLAccess;
 import net.spy.memcached.MemcachedClient;
 

@@ -1,6 +1,6 @@
 package ads;
 
-import org.apache.lucene.queryparser.surround.parser.QueryParser;
+import Campaign.Campaign;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import query.AdsSelector;
@@ -100,9 +100,7 @@ public class AdsEngine {
         List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
 
         AdsSelector adsSelector = new AdsSelector();
-        adsSelector.adsSelectorSQLInit();
         List<Ad> adList = adsSelector.selectAds(queryTokens);
-        adsSelector.adsSelectorSQLClose();
         System.out.println("Ad Searched size is: " + adList.size());
 
         List<Ad> firstFilterRestedAds = AdFilter.getInstance().filterLevelOne(adList);

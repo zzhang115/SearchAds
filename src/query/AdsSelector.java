@@ -18,13 +18,9 @@ public class AdsSelector {
     private static AdsSelector instance = null;
     private static final String MEMCACHEDSERVER = "127.0.0.1";
     private static final int MEMCACHEDPORT = 11211;
-    private SQLAccess sqlAccess = null;
-
-    public void adsSelectorSQLInit() {
-        sqlAccess = new SQLAccess();
-    }
 
     public List<Ad> selectAds(List<String> queryTokens) {
+        SQLAccess sqlAccess = new SQLAccess();
         List<Ad> adList = new ArrayList<Ad>();
         HashMap<Long, Integer> matchedAdsMap = new HashMap<Long, Integer>();
 
@@ -50,14 +46,11 @@ public class AdsSelector {
                 ad.relevanceScore = relevanveScore;
                 adList.add(ad);
             }
+            sqlAccess.connectionClose();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return adList;
-    }
-
-    public void adsSelectorSQLClose() {
-        sqlAccess.connectionClose();
     }
 }
 
