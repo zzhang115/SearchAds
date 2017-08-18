@@ -98,18 +98,17 @@ public class AdsEngine {
     public List<Ad> selectAds(String query) {
         //get query string keyword
         List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
+
         AdsSelector adsSelector = new AdsSelector();
         adsSelector.adsSelectorSQLInit();
         List<Ad> adList = adsSelector.selectAds(queryTokens);
         adsSelector.adsSelectorSQLClose();
+        System.out.println("Ad Searched size is: " + adList.size());
 
         List<Ad> firstFilterRestedAds = AdFilter.getInstance().filterLevelOne(adList);
-
-        for (Ad ad : firstFilterRestedAds) {
-            System.out.println("adId:"+ad.adId+" relevance:"+ad.relevanceScore);
-        }
+        System.out.println("After First Filter, Ad size is: " + firstFilterRestedAds.size());
         List<Ad> secondFilterRestedAds = AdFilter.getInstance().filterLevelTwo(firstFilterRestedAds);
-
+        System.out.println("After Second Filter, Ad size is: " + secondFilterRestedAds.size());
         return adList;
 
     }
