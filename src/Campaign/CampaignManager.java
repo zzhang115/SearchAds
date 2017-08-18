@@ -32,8 +32,10 @@ public class CampaignManager {
             if (campaignAd.costPerClick <= budget && campaignAd.costPerClick >= minPriceThreshold) {
                 adList.add(campaignAd);
                 budget = budget - campaignAd.costPerClick - 10;
-                sqlAccess.
+                sqlAccess.updateBudgetData(campaignAd.campaignId, budget);
             }
         }
+        sqlAccess.connectionClose();
+        return adList;
     }
 }

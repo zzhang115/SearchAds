@@ -1,6 +1,7 @@
 package ads;
 
 import Campaign.Campaign;
+import Campaign.CampaignManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import query.AdsSelector;
@@ -107,6 +108,13 @@ public class AdsEngine {
         System.out.println("After First Filter, Ad size is: " + firstFilterRestedAds.size());
         List<Ad> secondFilterRestedAds = AdFilter.getInstance().filterLevelTwo(firstFilterRestedAds);
         System.out.println("After Second Filter, Ad size is: " + secondFilterRestedAds.size());
+
+        CampaignManager campaignManager = new CampaignManager();
+        List<Ad> noDuplicateCampaignAdList = campaignManager.getNoDuplicateCampaignIdList(secondFilterRestedAds);
+        System.out.println("Remove Duplicate CampaignId, Ad size is: " + noDuplicateCampaignAdList.size());
+        List<Ad> finalAds = campaignManager.UpdateBudgetInfo(noDuplicateCampaignAdList);
+        System.out.println("Final Ad size is: " + finalAds.size());
+
         return adList;
 
     }
