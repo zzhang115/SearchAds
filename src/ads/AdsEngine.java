@@ -3,6 +3,7 @@ package ads;
 import org.apache.lucene.queryparser.surround.parser.QueryParser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import query.AdsSelector;
 import query.QueryHandling;
 
 import java.io.BufferedReader;
@@ -97,7 +98,11 @@ public class AdsEngine {
     public List<Ad> selectAds(String query) {
         //get query string keyword
         List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
-
+        AdsSelector adsSelector = new AdsSelector();
+        adsSelector.adsSelectorSQLInit();
+        adsSelector.selectAds(queryTokens);
+        adsSelector.adsSelectorSQLClose();
+        return null;
 
     }
 }

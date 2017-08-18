@@ -96,10 +96,11 @@ public class SQLAccess {
                  String thumbnail = resultSet.getString("thumbnail");
                  String description = resultSet.getString("description");
                  String brand = resultSet.getString("brand");
-                 String detail_url = resultSet.getString("detail_url");
+                 String detail_url = resultSet.getString("detailUrl");
                  String category = resultSet.getString("category");
                  String title = resultSet.getString("title");
                  double pClick = 0.0;
+                 System.out.println(adId+" "+ campaignId+" "+ brand+" "+ price+" "+ thumbnail+" "+ title+" "+ detail_url+" "+ bidPrice+" "+ pClick+" "+ category+" "+ description+" "+ keyWordsList);
                  ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detail_url, bidPrice, pClick, category, description, keyWordsList);
              }
              queryStatement.close();
