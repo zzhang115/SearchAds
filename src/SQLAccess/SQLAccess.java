@@ -100,7 +100,7 @@ public class SQLAccess {
                  String category = resultSet.getString("category");
                  String title = resultSet.getString("title");
                  double pClick = 0.0;
-                 System.out.println(adId+" "+ campaignId+" "+ brand+" "+ price+" "+ thumbnail+" "+ title+" "+ detail_url+" "+ bidPrice+" "+ pClick+" "+ category+" "+ description+" "+ keyWordsList);
+//                 System.out.println(adId+" "+ campaignId+" "+ brand+" "+ price+" "+ thumbnail+" "+ title+" "+ detail_url+" "+ bidPrice+" "+ pClick+" "+ category+" "+ description+" "+ keyWordsList);
                  ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detail_url, bidPrice, pClick, category, description, keyWordsList);
              }
              queryStatement.close();

@@ -100,9 +100,15 @@ public class AdsEngine {
         List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
         AdsSelector adsSelector = new AdsSelector();
         adsSelector.adsSelectorSQLInit();
-        adsSelector.selectAds(queryTokens);
+        List<Ad> adList = adsSelector.selectAds(queryTokens);
         adsSelector.adsSelectorSQLClose();
-        return null;
+
+        List<Ad> firstFilterRestedAds = AdFilter.getInstance().filterAdsLevelOne(adList);
+
+        for (Ad ad : firstFilterRestedAds) {
+            System.out.println("adId:"+ad.adId+" relevance:"+ad.relevanceScore);
+        }
+        return adList;
 
     }
 }

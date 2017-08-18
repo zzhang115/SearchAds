@@ -48,8 +48,7 @@ public class AdsSelector {
                 Ad ad = sqlAccess.getAdData(adId);
                 double relevanveScore = (double) (matchedAdsMap.get(adId) * 1.0 / ad.keyWords.size());
                 ad.relevanceScore = relevanveScore;
-                System.out.println(" relevance score: " + relevanveScore);
-                adList.add(sqlAccess.getAdData(adId));
+                adList.add(ad);
             }
         } catch (IOException e) {
             e.printStackTrace();
