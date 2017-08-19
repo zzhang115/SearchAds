@@ -31,12 +31,10 @@ public class Main {
             while((query=br.readLine())!=null){
                 System.out.println("Search: " + query);
                 List<Ad> adsCandidates = adsEngine.selectAds(query);
-
-//                for(Ad ad : adsCandidates)
-//                {
-//                    System.out.println("final selected ad id = " + ad.adId);
-//                    System.out.println("final selected ad rank score = " + ad.rankScore);
-//                }
+                for(Ad ad : adsCandidates) {
+                    System.out.println("final selected ad id = " + ad.adId);
+                    System.out.println("final selected ad rank score = " + ad.rankScore);
+                }
             }
         }catch(IOException io){
                 io.printStackTrace();

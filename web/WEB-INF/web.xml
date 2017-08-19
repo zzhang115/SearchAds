@@ -3,6 +3,59 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>adsDataFilePath</param-name>
+        <param-value>/home/zzc/NewSpace/IntelljWorkPlace/SearchAds/source/ads.txt</param-value>
+    </context-param>
+    <context-param>
+        <param-name>budgetDataFilePath</param-name>
+        <param-value>/home/zzc/NewSpace/IntelljWorkPlace/SearchAds/source/budget.txt</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>uiTemplateFilePath</param-name>
+        <param-value>/home/zzc/NewSpace/IntelljWorkPlace/SearchAds/ui.html</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>adTemplateFilePath</param-name>
+        <param-value>/home/zzc/NewSpace/IntelljWorkPlace/SearchAds/item.html</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>memcachedServer</param-name>
+        <param-value>127.0.0.1</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>memcachedPortal</param-name>
+        <param-value>11211</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>mysqlHost</param-name>
+        <param-value>127.0.0.1:3306</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>mysqlDB</param-name>
+        <param-value>searchads</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>mysqlUser</param-name>
+        <param-value>root</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>mysqlPass</param-name>
+        <param-value>238604</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>SearchAdsServlet</servlet-name>
         <servlet-class>server.SearchAdsServlet</servlet-class>

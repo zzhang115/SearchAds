@@ -115,7 +115,7 @@ public class AdsEngine {
 
         AdsAllocation adsAllocation = new AdsAllocation();
         adsAllocation.allocateAds(finalAds);
-        return adList;
+        return finalAds;
 
     }
 }
