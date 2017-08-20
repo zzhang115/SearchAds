@@ -1,4 +1,4 @@
-package SQLAccess;
+package sqlaccess;
 
 import ads.Ad;
 import campaign.Campaign;

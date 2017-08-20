@@ -1,7 +1,7 @@
 package ads;
 
 import campaign.Campaign;
-import SQLAccess.SQLAccess;
+import sqlaccess.SQLAccess;
 import net.spy.memcached.MemcachedClient;
 
 import java.io.IOException;

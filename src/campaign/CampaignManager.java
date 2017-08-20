@@ -1,6 +1,6 @@
 package campaign;
 
-import SQLAccess.SQLAccess;
+import sqlaccess.SQLAccess;
 import ads.Ad;
 
 import java.util.ArrayList;

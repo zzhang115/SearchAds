@@ -1,6 +1,6 @@
 package ads;
 
-import SQLAccess.SQLAccess;
+import sqlaccess.SQLAccess;
 import net.spy.memcached.MemcachedClient;
 
 import java.io.IOException;
