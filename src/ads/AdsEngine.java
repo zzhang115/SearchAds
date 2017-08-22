@@ -63,7 +63,7 @@ public class AdsEngine {
                 }
                 Ad ad = new Ad(adId, campaignId, brand, price, thumbnail, title, detailUrl, bidPrice, pClick, category, description, keyWordsList);
                 indexBuilder.buildTokenToAdId(ad);
-                indexBuilder.addAdsToDatabase(ad);
+//                indexBuilder.addAdsToDatabase(ad);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

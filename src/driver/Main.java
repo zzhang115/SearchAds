@@ -24,7 +24,7 @@ public class Main {
 
         AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath);
         adsEngine.initEngine();
-        System.out.println("Ready to take quey");
+        System.out.println("Ready to take query, please input tokens:");
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String query;
