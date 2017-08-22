@@ -21,4 +21,6 @@ public class QueryHandling {
         List<String> tokens = Utility.cleanUselessTokens(query);
         return tokens;
     }
+
+
 }

@@ -30,7 +30,7 @@ public class AdsEngine {
 
     public void initEngine() {
 //       buildAdsData();
-//        buildBudgetData();
+//       buildBudgetData();
     }
 
     public void buildAdsData() {
@@ -102,9 +102,9 @@ public class AdsEngine {
         List<Ad> adList = adsSelector.selectAds(queryTokens);
         System.out.println("Ad Searched size is: " + adList.size());
 
-        List<Ad> firstFilterRestedAds = AdFilter.getInstance().filterLevelOne(adList);
+        List<Ad> firstFilterRestedAds = AdsFilter.getInstance().filterLevelOne(adList);
         System.out.println("After First Filter, Ad size is: " + firstFilterRestedAds.size());
-        List<Ad> secondFilterRestedAds = AdFilter.getInstance().filterLevelTwo(firstFilterRestedAds);
+        List<Ad> secondFilterRestedAds = AdsFilter.getInstance().filterLevelTwo(firstFilterRestedAds);
         System.out.println("After Second Filter, Ad size is: " + secondFilterRestedAds.size());
 
         CampaignManager campaignManager = new CampaignManager();

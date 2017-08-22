@@ -5,16 +5,16 @@ import java.util.*;
 /**
  * Created by zzc on 8/17/17.
  */
-public class AdFilter {
-    private static AdFilter instance = null;
+public class AdsFilter {
+    private static AdsFilter instance = null;
     private static int minNumOfAds = 5;
     private static double pClickThreshold = 0.0;
     private static double relevanceThreshold = 0.1;
     private static int topK = 10;
 
-    public static AdFilter getInstance() {
+    public static AdsFilter getInstance() {
         if (instance == null) {
-            instance = new AdFilter();
+            instance = new AdsFilter();
             return instance;
         }
         return instance;

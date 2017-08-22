@@ -16,7 +16,7 @@ import java.util.Set;
 public class AdsSelector {
     private static AdsSelector instance = null;
     private static final String MEMCACHEDSERVER = "127.0.0.1";
-    private static final int MEMCACHEDPORT = 11211;
+    private static final int MEMCACHEDPORT = 11211; // we can use differenct port for different memecached
 
     public List<Ad> selectAds(List<String> queryTokens) {
         SQLAccess sqlAccess = new SQLAccess();
@@ -41,8 +41,8 @@ public class AdsSelector {
             for (Long adId : matchedAdsMap.keySet()) {
                 System.out.println("Selected AdID: " + adId + "token selected: "+ matchedAdsMap.get(adId) + " times");
                 Ad ad = sqlAccess.getAdData(adId);
-                double relevanveScore = (double) (matchedAdsMap.get(adId) * 1.0 / ad.keyWords.size());
-                ad.relevanceScore = relevanveScore;
+                double relevanceScore = (double) (matchedAdsMap.get(adId) * 1.0 / ad.keyWords.size());
+                ad.relevanceScore = relevanceScore;
                 adList.add(ad);
             }
             sqlAccess.connectionClose();
