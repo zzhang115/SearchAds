@@ -11,7 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zzc on 8/14/17.
@@ -95,14 +97,23 @@ public class AdsEngine {
         }
     }
 
-    public List<Ad> selectAds(String query) {
-        List<String> queryTokens= QueryHandling.getInstance().queryStringHandling(query);
-
+    public List<Ad> selectAds(String query, String deviceId, String deviceIp, String category) {
+        List<List<String>> queryRewriteTokens = QueryHandling.getInstance().queryRewrite(query);
         AdsSelector adsSelector = new AdsSelector();
-        List<Ad> adList = adsSelector.selectAds(queryTokens);
-        System.out.println("Ad Searched size is: " + adList.size());
+        List<Ad> adCandidates = new ArrayList<Ad>();
 
-        List<Ad> firstFilterRestedAds = AdsFilter.getInstance().filterLevelOne(adList);
+        for (List<String> queryRewriteToken : queryRewriteTokens) {
+            List<Ad> adList = adsSelector.selectAds(deviceId, deviceIp, category, queryRewriteToken);
+            for (Ad ad : adList) {
+                if (!adCandidates.contains(ad)) {
+                    adCandidates.add(ad);
+                }
+            }
+        }
+
+        System.out.println("Ad Searched size is: " + adCandidates.size());
+
+        List<Ad> firstFilterRestedAds = AdsFilter.getInstance().filterLevelOne(adCandidates);
         System.out.println("After First Filter, Ad size is: " + firstFilterRestedAds.size());
         List<Ad> secondFilterRestedAds = AdsFilter.getInstance().filterLevelTwo(firstFilterRestedAds);
         System.out.println("After Second Filter, Ad size is: " + secondFilterRestedAds.size());

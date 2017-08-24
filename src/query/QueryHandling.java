@@ -14,6 +14,7 @@ import java.util.List;
 public class QueryHandling {
     private static final String MEMCACHEDSERVER = "127.0.0.1";
     private static final int MEMCACHED_SYNON_PORT = 11212; // we can use differenct port for different memecached
+    // 11212 used to store query:a b c queryKey: a_b_c, queryValue: a_b_d, a_b_e...
     private static QueryHandling instance = null;
 
     public static QueryHandling getInstance() {
