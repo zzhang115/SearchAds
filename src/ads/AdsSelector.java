@@ -60,7 +60,7 @@ public class AdsSelector {
                     deviceIpClickValue = Double.parseDouble(deviceIpClickVal);
                 }
                 features.add(deviceIpClickValue);
-                System.out.println("deviceIpKey:"+deviceIpClickKey + " deviceIpValue:" + deviceIpClickValue);
+                System.out.println("deviceIpClickKey:"+deviceIpClickKey + " deviceIpClickValue:" + deviceIpClickValue);
 
                 // device ip impression
                 String deviceIpImpressionKey = "dipi_" + deviceIp;
@@ -72,9 +72,28 @@ public class AdsSelector {
                 features.add(deviceIpImpressionValue);
                 System.out.println("deviceIpImpressionKey:"+ deviceIpImpressionKey + " deviceIpImpressionValue:" + deviceIpImpressionValue);
 
+                // ad id click
+                String adIdClickKey = "aidc_" + String.valueOf(ad.adId);
+                String adIdClickVal = (String) client2.get(adIdClickKey);
+                Double adIdClickValue = 0.0;
+                if (adIdClickVal != null && adIdClickVal != "") {
+                    adIdClickValue = Double.parseDouble(adIdClickVal);
+                }
+                features.add(adIdClickValue);
+                System.out.println("adIdClickKey:"+ adIdClickKey + " adIdClickValue:" + adIdClickValue);
+
+                // ad imp
+                String adIdImpressionKey = "aidi" + String.valueOf(ad.adId);
+                String adIdImpressionVal = (String) client2.get(adIdImpressionKey);
+                Double adIdImpressionValue = 0.0;
+                if (adIdImpressionVal != null && adIdImpressionVal != "") {
+                    adIdImpressionValue = Double.parseDouble(adIdImpressionVal);
+                }
+                features.add(adIdImpressionValue);
+                System.out.println("adIdImpressionKey:" + adIdImpressionKey + " adIdImpressionValue:" + adIdImpressionValue);
+
+
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
