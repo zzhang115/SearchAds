@@ -48,6 +48,8 @@ public class IndexBuilder {
         }
     }
 
+
+
     public void addAdsToDatabase(Ad ad) {
         sqlAccess.addAdData(ad);
     }

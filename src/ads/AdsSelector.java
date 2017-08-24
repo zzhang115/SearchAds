@@ -17,7 +17,7 @@ public class AdsSelector {
     private static AdsSelector instance = null;
     private static final String MEMCACHEDSERVER = "127.0.0.1";
     private static final int MEMCACHEDPORT = 11211; // we can use differenct port for different memecached
-    private static final int MEMFEATUREPORT = 11218; // we can use differenct port for different memecached
+    private static final int MEMCACHED_FEATURE_PORT = 11212; // we can use differenct port for different memecached
 
     public List<Ad> selectAds(List<String> queryTokens) {
         SQLAccess sqlAccess = new SQLAccess();
@@ -47,7 +47,7 @@ public class AdsSelector {
                 adList.add(ad);
             }
             sqlAccess.connectionClose();
-            MemcachedClient client2 = new MemcachedClient(new InetSocketAddress(MEMCACHEDSERVER, MEMFEATUREPORT));
+            MemcachedClient client2 = new MemcachedClient(new InetSocketAddress(MEMCACHEDSERVER, MEMCACHED_FEATURE_PORT));
 
         } catch (IOException e) {
             e.printStackTrace();

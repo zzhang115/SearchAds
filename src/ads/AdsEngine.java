@@ -96,7 +96,7 @@ public class AdsEngine {
     }
 
     public List<Ad> selectAds(String query) {
-        List<String> queryTokens= QueryHandling.getInstance().QueryStringHandling(query);
+        List<String> queryTokens= QueryHandling.getInstance().queryStringHandling(query);
 
         AdsSelector adsSelector = new AdsSelector();
         List<Ad> adList = adsSelector.selectAds(queryTokens);
