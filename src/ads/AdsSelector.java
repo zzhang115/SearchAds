@@ -92,6 +92,27 @@ public class AdsSelector {
                 features.add(adIdImpressionValue);
                 System.out.println("adIdImpressionKey:" + adIdImpressionKey + " adIdImpressionValue:" + adIdImpressionValue);
 
+                String query = Utility.strJoin(queryTokens, "_");
+                //query campaignId click
+                String queryCampaignIdClickKey = "qcidc_" + query + "_" + ad.campaignId;
+                String queryCampaignIdClickVal = (String) client2.get(queryCampaignIdClickKey);
+                Double queryCampaignIdClickValue = 0.0;
+                if (queryCampaignIdClickVal != null && queryCampaignIdClickVal != "") {
+                    queryCampaignIdClickValue = Double.parseDouble(queryCampaignIdClickVal);
+                }
+                features.add(queryCampaignIdClickValue);
+
+                // query campaignIdImpression
+                String queryCampaignIdImpressionKey = "qcidi_" + query + "_" + ad.campaignId;
+                String queryCampaignIdImpressionVal = (String) client2.get(queryCampaignIdImpressionKey);
+                Double queryCampaignIdImpressionValue = 0.0;
+                if (queryCampaignIdClickVal != null && queryCampaignIdClickVal != "") {
+                    queryCampaignIdClickValue = Double.parseDouble(queryCampaignIdClickVal);
+                }
+
+                // queryAdIdClick
+                String queryAdIdClickKey = "qaidc_" +
+
 
             }
         } catch (IOException e) {
