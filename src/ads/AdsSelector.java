@@ -106,14 +106,37 @@ public class AdsSelector {
                 String queryCampaignIdImpressionKey = "qcidi_" + query + "_" + ad.campaignId;
                 String queryCampaignIdImpressionVal = (String) client2.get(queryCampaignIdImpressionKey);
                 Double queryCampaignIdImpressionValue = 0.0;
-                if (queryCampaignIdClickVal != null && queryCampaignIdClickVal != "") {
-                    queryCampaignIdClickValue = Double.parseDouble(queryCampaignIdClickVal);
+                if (queryCampaignIdImpressionVal != null && queryCampaignIdImpressionVal != "") {
+                    queryCampaignIdImpressionValue = Double.parseDouble(queryCampaignIdImpressionVal);
                 }
+                features.add(queryCampaignIdImpressionValue);
 
                 // queryAdIdClick
-                String queryAdIdClickKey = "qaidc_" +
+                String queryAdIdClickKey = "qaidc_" + query + "_" + ad.adId;
+                String queryAdIdClickVal = (String) client2.get(queryAdIdClickKey);
+                Double queryAdIdClickValue = 0.0;
+                if (queryAdIdClickVal != null && queryAdIdClickVal != "") {
+                    queryAdIdClickValue = Double.parseDouble(queryAdIdClickVal);
+                }
+                features.add(queryAdIdClickValue);
 
+                // queryAdIdImpression
+                String queryAdIdImpressionKey = "qaidi" + query + "_" + ad.adId;
+                String queryAdIdImpressionVal = (String) client2.get(queryAdIdImpressionKey);
+                Double queryAdIdImpressionValue = 0.0;
+                if (queryAdIdImpressionVal != null && queryAdIdImpressionVal != "") {
+                    queryAdIdImpressionValue = Double.parseDouble(queryAdIdImpressionVal);
+                }
+                features.add(queryAdIdImpressionValue);
 
+                // query ad category match scale to 1000000 if match
+                double queryAdCategoryMatch = 0.0;
+                if (queryCategory == ad.category) {
+                    queryAdCategoryMatch = 1000000.0;
+                }
+                features.add(queryAdCategoryMatch);
+
+//                ad.pClick =
             }
         } catch (IOException e) {
             e.printStackTrace();
