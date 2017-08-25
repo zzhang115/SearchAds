@@ -16,7 +16,7 @@ public class CTRModel {
     private static ArrayList<Double> weightsLogistic;
     private static Double biasLogistic;
 
-    protected CTRModel(String logisticRegModelFile, String gdbtModelPath) {
+    public CTRModel(String logisticRegModelFile, String gdbtModelPath) {
         weightsLogistic = new ArrayList<Double>();
         try {
             BufferedReader ctrLogisticReader = new BufferedReader(new FileReader(logisticRegModelFile));

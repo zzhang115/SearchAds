@@ -1,5 +1,6 @@
 package ads;
 
+import CTRModel.CTRModel;
 import sqlaccess.SQLAccess;
 import net.spy.memcached.MemcachedClient;
 
@@ -14,10 +15,17 @@ import java.util.Set;
  * Created by zzc on 8/16/17.
  */
 public class AdsSelector {
-    private static AdsSelector instance = null;
     private static final String MEMCACHEDSERVER = "127.0.0.1";
     private static final int MEMCACHEDPORT = 11211; // we can use differenct port for different memecached
     private static final int MEMCACHED_FEATURE_PORT = 11213; // we can use differenct port for different memecached
+    private String logisticRegModelFile;
+    private String gdbtModelFile;
+
+    public AdsSelector(String logisticRegModelFile, String gdbtModelFile) {
+        this.logisticRegModelFile = logisticRegModelFile;
+        this.gdbtModelFile = gdbtModelFile;
+
+    }
 
     public List<Ad> selectAds(String deviceId, String deviceIp, String queryCategory, List<String> queryTokens) {
         SQLAccess sqlAccess = new SQLAccess();
@@ -71,6 +79,26 @@ public class AdsSelector {
                 }
                 features.add(deviceIpImpressionValue);
                 System.out.println("deviceIpImpressionKey:"+ deviceIpImpressionKey + " deviceIpImpressionValue:" + deviceIpImpressionValue);
+
+                // device id click
+                String deviceIdClickKey = "didc_" + deviceId;
+                String deviceIdClickVal= (String) client2.get(deviceIdClickKey);
+                Double deviceIdClickValue = 0.0;
+                if (deviceIdClickVal != null && deviceIdClickVal!= "") {
+                    deviceIdClickValue = Double.parseDouble(deviceIdClickVal);
+                }
+                features.add(deviceIdClickValue);
+                System.out.println("deviceIdClickKey:" + deviceIdClickKey + " deviceIdClickVal:" + deviceIdClickValue);
+
+                // device id impression
+                String deviceIdImpressionKey = "didi_" + deviceId;
+                String deviceIdImpressionVal = (String)client2.get(deviceIdImpressionKey);
+                Double deviceIdImpressionValue = 0.0;
+                if (deviceIdImpressionVal != null && deviceIdImpressionVal!= "") {
+                    deviceIdImpressionValue = Double.parseDouble(deviceIdImpressionVal);
+                }
+                features.add(deviceIdImpressionValue);
+                System.out.println("deviceIdImpressionKey:" + deviceIdImpressionKey + " deviceIdImpressionVal = " + deviceIdImpressionValue);
 
                 // ad id click
                 String adIdClickKey = "aidc_" + String.valueOf(ad.adId);
@@ -136,7 +164,9 @@ public class AdsSelector {
                 }
                 features.add(queryAdCategoryMatch);
 
-//                ad.pClick =
+                ad.pClick = new CTRModel(this.logisticRegModelFile, this.gdbtModelFile)
+                        .predictCTRWithLogisticRegression(features);
+                System.out.println("ad.pClick:" + ad.pClick);
             }
         } catch (IOException e) {
             e.printStackTrace();
