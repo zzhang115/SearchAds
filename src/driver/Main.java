@@ -14,8 +14,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        if(args.length < 2)
-        {
+        if (args.length < 2) {
             System.out.println("Usage: AdsServer <adsDataFilePath> <budgetDataFilePath>");
             System.exit(0);
         }
@@ -25,18 +24,18 @@ public class Main {
         AdsEngine adsEngine = new AdsEngine(adsDataFilePath, budgetDataFilePath);
         adsEngine.initEngine();
         System.out.println("Ready to take query, please input tokens:");
-        try{
+        try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String query;
-            while((query=br.readLine())!=null){
+            while ((query=br.readLine())!=null) {
                 System.out.println("Search: " + query);
-                List<Ad> adsCandidates = adsEngine.selectAds(query);
-                for(Ad ad : adsCandidates) {
+                List<Ad> adsCandidates = adsEngine.selectAds(query, "12", "231407", "car");
+                for (Ad ad : adsCandidates) {
                     System.out.println("final selected ad id = " + ad.adId);
                     System.out.println("final selected ad rank score = " + ad.rankScore);
                 }
             }
-        }catch(IOException io){
+        } catch(IOException io) {
                 io.printStackTrace();
         }
     }

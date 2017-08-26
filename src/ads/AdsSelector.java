@@ -18,14 +18,6 @@ public class AdsSelector {
     private static final String MEMCACHEDSERVER = "127.0.0.1";
     private static final int MEMCACHEDPORT = 11211; // we can use differenct port for different memecached
     private static final int MEMCACHED_FEATURE_PORT = 11213; // we can use differenct port for different memecached
-    private String logisticRegModelFile;
-    private String gdbtModelFile;
-
-    public AdsSelector(String logisticRegModelFile, String gdbtModelFile) {
-        this.logisticRegModelFile = logisticRegModelFile;
-        this.gdbtModelFile = gdbtModelFile;
-
-    }
 
     public List<Ad> selectAds(String deviceId, String deviceIp, String queryCategory, List<String> queryTokens) {
         SQLAccess sqlAccess = new SQLAccess();
@@ -164,7 +156,7 @@ public class AdsSelector {
                 }
                 features.add(queryAdCategoryMatch);
 
-                ad.pClick = new CTRModel(this.logisticRegModelFile, this.gdbtModelFile)
+                ad.pClick = new CTRModel()
                         .predictCTRWithLogisticRegression(features);
                 System.out.println("ad.pClick:" + ad.pClick);
             }

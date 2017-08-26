@@ -15,8 +15,10 @@ import java.util.ArrayList;
 public class CTRModel {
     private static ArrayList<Double> weightsLogistic;
     private static Double biasLogistic;
+    private static String logisticRegModelFile = "";
+    private static String gdbtModelFile = "";
 
-    public CTRModel(String logisticRegModelFile, String gdbtModelPath) {
+    public CTRModel() {
         weightsLogistic = new ArrayList<Double>();
         try {
             BufferedReader ctrLogisticReader = new BufferedReader(new FileReader(logisticRegModelFile));
