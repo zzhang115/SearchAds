@@ -59,7 +59,7 @@ public class AdsSelector {
             MemcachedClient client2 = new MemcachedClient(new InetSocketAddress(MEMCACHEDSERVER, MEMCACHED_FEATURE_PORT));
             for (Ad ad : adList) {
                 ArrayList<Double> features = new ArrayList<Double>();
-
+                // for this part, we get data from memcach, data from we create use python before, like create logfile
                 // device ip click
                 String deviceIpClickKey = "dipc_" + deviceIp;
                 String deviceIpClickVal = (String) client2.get(deviceIpClickKey);
