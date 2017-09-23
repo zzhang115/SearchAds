@@ -7,17 +7,17 @@ public class Ad implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	public long adId;
-	public long campaignId;
-	public List<String> keyWords;
-	public double relevanceScore;
-	public double pClick;	
-	public double bidPrice;
-	public double rankScore;
-	public double qualityScore;
-	public double costPerClick;
-	public int position;//1: top , 2: bottom
+    private static final long serialVersionUID = 1L;
+    public long adId;
+    public long campaignId;
+    public List<String> keyWords;
+    public double relevanceScore;
+    public double pClick;
+    public double bidPrice;
+    public double rankScore;
+    public double qualityScore;
+    public double costPerClick;
+    public int position;//1: top , 2: bottom
     public String title; // required
     public double price; // required
     public String thumbnail; // required

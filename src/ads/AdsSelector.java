@@ -76,7 +76,7 @@ public class AdsSelector {
                 String deviceIdClickKey = "didc_" + deviceId;
                 String deviceIdClickVal= (String) client2.get(deviceIdClickKey);
                 Double deviceIdClickValue = 0.0;
-                if (deviceIdClickVal != null && deviceIdClickVal!= "") {
+                if (deviceIdClickVal != null && deviceIdClickVal != "") {
                     deviceIdClickValue = Double.parseDouble(deviceIdClickVal);
                 }
                 features.add(deviceIdClickValue);
@@ -86,7 +86,7 @@ public class AdsSelector {
                 String deviceIdImpressionKey = "didi_" + deviceId;
                 String deviceIdImpressionVal = (String)client2.get(deviceIdImpressionKey);
                 Double deviceIdImpressionValue = 0.0;
-                if (deviceIdImpressionVal != null && deviceIdImpressionVal!= "") {
+                if (deviceIdImpressionVal != null && deviceIdImpressionVal != "") {
                     deviceIdImpressionValue = Double.parseDouble(deviceIdImpressionVal);
                 }
                 features.add(deviceIdImpressionValue);
