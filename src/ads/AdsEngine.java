@@ -18,7 +18,6 @@ import java.util.Set;
 /**
  * Created by zzc on 8/14/17.
  */
-
 public class AdsEngine {
     private String adsDataFilePath;
     private String budgetFilePath;
@@ -31,8 +30,8 @@ public class AdsEngine {
     }
 
     public void initEngine() {
-//       buildAdsData();
-//       buildBudgetData();
+      buildAdsData();
+      buildBudgetData();
     }
 
     public void buildAdsData() {

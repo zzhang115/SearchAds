@@ -175,7 +175,6 @@ public class CrawlerForAmazon {
                     continue;
                 }
 
-
                 String brand_path = "#result_"+Integer.toString(i)+" > div > div > div > div.a-fixed-left-grid-col.a-col-right > div.a-row.a-spacing-small > div > span:nth-child(2)";
                 Element brand = doc.select(brand_path).first();
                 if(brand != null) {
@@ -191,7 +190,6 @@ public class CrawlerForAmazon {
                 Element price_whole_ele = doc.select(price_whole_path).first();
                 if(price_whole_ele != null) {
                     String price_whole = price_whole_ele.text();
-                    //System.out.println("price whole = " + price_whole);
                     //remove ","
                     //1,000
                     if (price_whole.contains(",")) {
