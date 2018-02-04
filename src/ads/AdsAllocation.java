@@ -8,6 +8,7 @@ import java.util.List;
 public class AdsAllocation {
     private static double mainLinePriceThreshold = 5;
 
+    // ad position 1: main line, 2: sidebar
     public void allocateAds(List<Ad> adList) {
         for (Ad ad : adList) {
             if (ad.costPerClick >= mainLinePriceThreshold) {
