@@ -1,5 +1,7 @@
 <html>
+<head><title></title>
+<meta http-equiv="refresh" content="0;URL=index.jsp">
+</head>
 <body>
-<h2>Hello World!</h2>
 </body>
 </html>
